@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./src/api # プロジェクトのルートディレクトリにあるNestJSアプリケーションを指す
+      dockerfile: ../../docker/api/Dockerfile # Dockerfileの相対パスを指定
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/api:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
