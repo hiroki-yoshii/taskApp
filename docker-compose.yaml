@@ -8,6 +8,7 @@ services:
       - "8081:3000"
     volumes:
       - ./src/api:/usr/src/app
+      - ./src/swagger.yaml:/usr/src/app/swagger.yaml
       - /usr/src/app/node_modules
     command: npm run start:dev
 

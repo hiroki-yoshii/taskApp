@@ -1,0 +1,106 @@
+swagger: '2.0'
+info:
+  title: タスク管理API
+  description: タスク管理API
+  version: "1.0.0"
+host: 'localhost:8080'
+schemes:
+  - http
+basePath: '/api'
+produces:
+  - application/json
+paths:
+  /tasks:
+    post:
+      summary: タスクの登録
+      description: 新しいタスクを登録します。
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: task
+          description: タスクオブジェクト
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCreate'
+      responses:
+        201:
+          description: タスクの登録に成功しました。
+        400:
+          description: 入力が不正です。
+    get:
+      summary: タスクの取得 (全件)
+      description: 登録されている全てのタスクを取得します。
+      responses:
+        200:
+          description: 成功
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Task'
+  /tasks/{id}:
+    put:
+      summary: タスクの更新
+      description: 指定されたIDのタスクを更新します。
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: タスクID
+        - in: body
+          name: task
+          description: タスクオブジェクト
+          required: true
+          schema:
+            $ref: '#/definitions/TaskUpdate'
+      responses:
+        200:
+          description: タスクの更新に成功しました。
+        400:
+          description: 入力が不正です。
+        404:
+          description: タスクが見つかりません。
+definitions:
+  TaskCreate:
+    type: object
+    required:
+      - name
+      - startDate
+      - dueDate
+    properties:
+      name:
+        type: string
+      startDate:
+        type: string
+        format: date
+      dueDate:
+        type: string
+        format: date
+  TaskUpdate:
+    type: object
+    properties:
+      name:
+        type: string
+      startDate:
+        type: string
+        format: date
+      dueDate:
+        type: string
+        format: date
+  Task:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      startDate:
+        type: string
+        format: date
+      dueDate:
+        type: string
+        format: date
