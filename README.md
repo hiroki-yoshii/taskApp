@@ -3,5 +3,5 @@
 
 ```
 docker compose exec api  sh
-openapi-generator-cli generate -i swagger.yaml -g typescript-nestjs -o /srcls
+openapi-generator-cli generate -i swagger.yaml -g typescript-nestjs -o /src
 ```
